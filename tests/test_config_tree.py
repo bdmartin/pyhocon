@@ -177,6 +177,11 @@ class TestConfigTree(object):
         config_tree.put("float", 2.345)
         assert config_tree.get_string("float") == "2.345"
 
+    def test_attribute(self):
+        config_tree = ConfigTree()
+        config_tree.put("foo", "bar")
+        assert config_tree.foo == "bar"
+
     def test_overrides_int_with_config_no_append(self):
         config_tree = ConfigTree()
         config_tree.put("int", 5)
@@ -292,3 +297,8 @@ class TestConfigTree(object):
         ]:
             with pytest.raises(ConfigMissingException):
                 assert getter('missing_key')
+
+    def test_attributemissing_raised(self):
+        config_tree = ConfigTree()
+        with pytest.raises(AttributeError):
+            assert config_tree.missing_attribute

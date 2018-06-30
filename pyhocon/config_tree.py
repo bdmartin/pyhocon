@@ -351,7 +351,7 @@ class ConfigTree(OrderedDict):
     def __getattr__(self, item):
         val = self.get(item, NonExistentKey)
         if val is NonExistentKey:
-            return super(ConfigTree, self).__getattr__(item)
+            raise AttributeError(item)
         return val
 
     def __contains__(self, item):
